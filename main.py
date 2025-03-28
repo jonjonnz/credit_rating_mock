@@ -6,4 +6,6 @@ with open("input.json", "r") as f:
 
 data = json.loads(json_data)
 
-credit_rating.calculate_credit_rating(data)
+rating = credit_rating.calculate_credit_rating(data.get("mortgages"))
+
+print(rating)

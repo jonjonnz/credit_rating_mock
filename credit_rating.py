@@ -2,14 +2,18 @@ import json
 
 
 def calculate_credit_rating(mortgages) -> str:
-    rating = 0
+    risk = 0
+    total_credit_score = 0
     for data in mortgages:
-        data_rating = calculate_individual_rating(data)
-        rating += data_rating
+        data_risk = calculate_individual_risk(data)
+        risk += data_risk
+        total_credit_score += data.get("credit_score")
 
-    if rating <= 2:
+    acs_risk = average_credit_score_risk(total_credit_score, len(mortgages))
+    risk += acs_risk
+    if risk <= 2:
         return "AAA"
-    elif rating <= 5:
+    elif risk <= 5:
         return "BBB"
 
     return "C"
@@ -75,5 +79,22 @@ def average_credit_score_risk(total_credit: float, num_of_mortgages: int) -> int
     return 0
 
 
-def calculate_individual_rating(data) -> int:
-    pass
+def calculate_individual_risk(data) -> int:
+    risk = 0
+
+    ltv = calculate_ltv_risk(data.get("loan_amount"), data.get("property_value"))
+    risk += ltv
+
+    dti = calculate_dti_risk(data.get("debt_amount"), data.get("annual_income"))
+    risk += dti
+
+    credit = process_credit_score_risk(data.get("credit_score"))
+    risk += credit
+
+    l_type = process_loan_type_risk(data.get("loan_type"))
+    risk += l_type
+
+    p_type = process_property_type_risk(data.get("property_type"))
+    risk += p_type
+
+    return risk

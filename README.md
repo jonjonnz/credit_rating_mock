@@ -7,8 +7,13 @@ This project calculates the credit rating for a set of mortgages based on variou
 
 ## Requirements
 - **Python Version:** 3.12  
-- **Input Data:** A JSON file named `input.json` must be present in the same directory as `main.py`.  
-- **Sample Data Structure:**  
+- **Input Data:** A JSON file named `input.json` must be present in the same directory as `main.py`.
+
+
+## Sample Input JSON
+
+- **The input consists of a JSON payload that represents a collection of mortgages within a residential 
+mortgage-backed security (RMBS). Each mortgage includes the following attributes:**  
 
 ```json
 {

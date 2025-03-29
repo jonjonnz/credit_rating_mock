@@ -3,14 +3,17 @@ import json
 
 
 def main():
-    with open("input.json", "r") as f:
-        json_data = f.read()
+    try:
+        with open("input.json", "r") as f:
+            json_data = f.read()
 
-    data = json.loads(json_data)
+        data = json.loads(json_data)
 
-    rating = credit_rating.calculate_credit_rating(data.get("mortgages"))
+        rating = credit_rating.calculate_credit_rating(data.get("mortgages"))
 
-    print(rating)
+        print(f"Final Credit Rating: {rating}")
+    except Exception as err:
+        print(err)
 
 
 if __name__ == "__main__":
